@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.pnpm-store/
+*.log
+*.tsbuildinfo
+*.zip
+.agents/
+skills-lock.json
