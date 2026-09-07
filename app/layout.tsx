@@ -4,6 +4,7 @@ import "./premium-refinement.css";
 import "./collection-wheel.css";
 import "./kaushals-home.css";
 import "./hero-single.css";
+import "./category-edit.css";
 
 export const metadata: Metadata = { title: "Kaushals | Contemporary Indian Jewellery", description: "Artful artificial jewellery, made to hold your attention and move with your life.", openGraph: { title: "Kaushals | Contemporary Indian Jewellery", description: "Pieces with presence, designed for the everyday ceremony.", type: "website" } };
 
