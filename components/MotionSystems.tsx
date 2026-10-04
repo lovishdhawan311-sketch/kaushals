@@ -5,11 +5,27 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { products } from "@/lib/catalog";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function MotionSystems() {
   const scope = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const routeCommerceClicks = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const image = target.closest<HTMLImageElement>(".product-image img");
+      if (image) {
+        const product = products.find((item) => image.currentSrc.endsWith(`/images/kaushals/${item.image}`));
+        if (product) { event.preventDefault(); event.stopPropagation(); window.location.assign(`/product/${product.id}`); }
+        return;
+      }
+      if (target.closest('button[aria-label="Bag"]')) { event.preventDefault(); event.stopPropagation(); window.location.assign("/cart"); }
+    };
+    document.addEventListener("click", routeCommerceClicks, true);
+    return () => document.removeEventListener("click", routeCommerceClicks, true);
+  }, []);
 
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;

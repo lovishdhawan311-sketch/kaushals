@@ -1,0 +1,8 @@
+/* Removed homepage chapters: manifesto, collection editorial, signature story, lookbook, and browse-by-mood. */
+.site-shell > .manifesto,
+.site-shell > .collections,
+.site-shell > .story,
+.site-shell > .lookbook,
+.site-shell > .collection-browse,
+.site-shell > .newsletter,
+.site-shell > .coming-soon { display: none; }
