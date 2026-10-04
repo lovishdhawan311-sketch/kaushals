@@ -23,9 +23,10 @@ export default function ProductDetailView() {
   }, [product?.id]);
 
   if (!product) return <main className="commerce-view commerce-view--empty"><Link href="/#shop"><ArrowLeft /> Back to collection</Link><h1>That piece is no longer available.</h1></main>;
+  const currentProduct = product;
 
   function addToBag() {
-    const line: CartLine = { id: product.id, q: qty, variant };
+    const line: CartLine = { id: currentProduct.id, q: qty, variant };
     try {
       const bag: CartLine[] = JSON.parse(localStorage.getItem(bagKey) || "[]");
       const exists = bag.find((item) => item.id === line.id && item.variant === line.variant);
@@ -36,7 +37,7 @@ export default function ProductDetailView() {
   }
 
   function buyNow() {
-    localStorage.setItem(orderKey, JSON.stringify([{ id: product.id, q: qty, variant }]));
+    localStorage.setItem(orderKey, JSON.stringify([{ id: currentProduct.id, q: qty, variant }]));
     router.push("/checkout");
   }
 
@@ -45,7 +46,7 @@ export default function ProductDetailView() {
     setSaved(next);
     try {
       const existing: number[] = JSON.parse(localStorage.getItem("kaushals-wish") || "[]");
-      localStorage.setItem("kaushals-wish", JSON.stringify(next ? [...new Set([...existing, product.id])] : existing.filter((id) => id !== product.id)));
+      localStorage.setItem("kaushals-wish", JSON.stringify(next ? [...new Set([...existing, currentProduct.id])] : existing.filter((id) => id !== currentProduct.id)));
     } catch { /* Local persistence is optional. */ }
   }
 
